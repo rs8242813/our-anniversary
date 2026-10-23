@@ -1,46 +1,116 @@
-const pages = Array.from(document.querySelectorAll(".page"));
+document.addEventListener("DOMContentLoaded", function () {
+"use strict";
 
+```
+// Find all website pages
+const pages = document.querySelectorAll(".page");
+
+// Function to switch between full-screen pages
 function showPage(pageId) {
-const target = document.getElementById(pageId);
+    const targetPage = document.getElementById(pageId);
 
-```
-if (!target || !target.classList.contains("page")) {
-    return;
+    if (!targetPage) {
+        console.error("Cannot find page:", pageId);
+        return;
+    }
+
+    // Hide all pages
+    pages.forEach(function (page) {
+        page.classList.remove("active");
+    });
+
+    // Show the selected page
+    targetPage.classList.add("active");
+
+    // Start at the top of the new page
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
-pages.forEach(page => {
-    page.classList.remove("active");
-});
+// PAGE 1: Open Our Story
+const beginButton = document.getElementById("beginButton");
 
-target.classList.add("active");
-window.scrollTo(0, 0);
-```
-
+if (beginButton) {
+    beginButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        showPage("memories");
+    });
 }
 
-document.getElementById("beginButton").addEventListener("click", () => {
-showPage("memories");
+// NEXT buttons throughout the website
+const nextButtons = document.querySelectorAll("[data-next]");
+
+nextButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const nextPageId = button.getAttribute("data-next");
+        showPage(nextPageId);
+    });
 });
 
-document.querySelectorAll("[data-next]").forEach(button => {
-button.addEventListener("click", () => {
-showPage(button.dataset.next);
-});
-});
+// Restart the experience
+const restartButton = document.getElementById("restartButton");
 
-document.getElementById("restartButton").addEventListener("click", () => {
-showPage("welcome");
-});
+if (restartButton) {
+    restartButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        showPage("welcome");
+    });
+}
+
+// QUIZ: Playful answer responses
+const quizFeedback = document.getElementById("quizFeedback");
 
 const quizResponses = [
-"Haha! Someone's definitely taking the blame for this one. 😂",
-"We might need to investigate that answer! 🌿",
-"Correct! Two dramatic souls, one beautiful story. 😂🌼"
+    "Haha! Someone's definitely taking the blame for this one! 😂🌿",
+    "We might need to investigate that answer! 🌼",
+    "Correct! Two dramatic souls, one beautiful story! 😂🍃"
 ];
 
-document.querySelectorAll(".answer-button").forEach((button, index) => {
-button.addEventListener("click", () => {
-const feedback = document.getElementById("quizFeedback");
-feedback.textContent = quizResponses[index];
+const answerButtons = document.querySelectorAll(".answer-button");
+
+answerButtons.forEach(function (button, index) {
+    button.addEventListener("click", function () {
+        if (!quizFeedback) {
+            return;
+        }
+
+        // Highlight the selected answer
+        answerButtons.forEach(function (answerButton) {
+            answerButton.style.backgroundColor = "";
+            answerButton.style.fontWeight = "";
+        });
+
+        button.style.backgroundColor = "#DDE8D5";
+        button.style.fontWeight = "700";
+
+        // Display the response
+        quizFeedback.textContent =
+            quizResponses[index] ||
+            "Every answer is special when it's about us! 🌿";
+    });
 });
+
+// Keyboard accessibility: activate buttons with Enter or Space
+document.querySelectorAll("button").forEach(function (button) {
+    button.addEventListener("keydown", function (event) {
+        if (
+            (event.key === "Enter" || event.key === " ") &&
+            document.activeElement === button
+        ) {
+            event.preventDefault();
+            button.click();
+        }
+    });
+});
+
+// Show the opening page when the website loads
+showPage("welcome");
+
+console.log("🌿 A Garden Called Us is ready!");
+```
+
 });
