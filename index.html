@@ -1,223 +1,625 @@
+html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#DDE8D5">
-
-
-<title>A Garden Called Us 🌿</title>
-
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#d8e5ce">
+<title>Our Little Garden | Our Anniversary</title>
 
 <style>
-    .page {
-        display: none !important;
-    }
+:root {
+  --sage: #dce8d2;
+  --mint: #edf2e5;
+  --deep: #294b3a;
+  --green: #52765c;
+  --cream: #fffdf4;
+  --text: #263d30;
+}
 
-    .page.active {
-        display: flex !important;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    button {
-        position: relative;
-        z-index: 100;
-        cursor: pointer;
-        touch-action: manipulation;
-    }
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background: var(--sage);
+}
 
-    .page.active {
-        animation: revealPage 0.5s ease;
-    }
+body {
+  overflow: hidden;
+}
 
-    @keyframes revealPage {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
+button {
+  font: inherit;
+  cursor: pointer;
+}
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+.page {
+  display: none !important;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  overflow-y: auto;
+  padding: 28px 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at top left, #f7f5e7 0%, transparent 48%),
+    linear-gradient(135deg, #e8edda, #cbdcc3);
+}
+
+.page.active {
+  display: flex !important;
+  animation: appear .55s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page::before,
+.page::after {
+  content: "❧";
+  position: absolute;
+  color: #6f946c;
+  opacity: .28;
+  font-size: 64px;
+  pointer-events: none;
+}
+
+.page::before {
+  top: 12px;
+  left: 18px;
+}
+
+.page::after {
+  bottom: 12px;
+  right: 18px;
+  transform: rotate(180deg);
+}
+
+.content {
+  width: min(900px, 100%);
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--deep);
+}
+
+h1 {
+  font-size: clamp(38px, 7vw, 76px);
+  line-height: 1.05;
+  margin: 18px 0;
+  color: var(--deep);
+  font-weight: normal;
+}
+
+h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  color: var(--deep);
+  font-weight: normal;
+  margin: 15px 0;
+}
+
+p {
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.subtitle {
+  max-width: 650px;
+  margin: 12px auto 24px;
+}
+
+button.primary,
+button.secondary {
+  border: none;
+  border-radius: 50px;
+  padding: 15px 26px;
+  margin: 9px 5px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  transition: transform .2s, background .2s;
+}
+
+button.primary {
+  background: var(--deep);
+  color: white;
+}
+
+button.secondary {
+  background: #f8f7eb;
+  color: var(--deep);
+  border: 1px solid #c4d4bb;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.flower {
+  font-size: 44px;
+  margin: 12px;
+}
+
+.paper {
+  background: rgba(255,253,244,.88);
+  border-radius: 26px;
+  padding: 25px;
+  margin: 20px auto;
+  box-shadow: 0 12px 35px rgba(42,70,45,.08);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px auto;
+  text-align: left;
+}
+
+.photo-card {
+  min-width: 0;
+  background: var(--cream);
+  padding: 9px 9px 13px;
+  border-radius: 13px;
+  box-shadow: 0 5px 16px #284b3a12;
+  transform: rotate(-1deg);
+}
+
+.photo-card:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #e0e8d7;
+}
+
+.photo-card p {
+  font-family: Georgia, serif;
+  text-align: center;
+  margin: 10px 2px 0;
+  font-size: 15px;
+}
+
+.photo-card small {
+  display: block;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #657665;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.photo-card img:not([src]) {
+  min-height: 180px;
+}
+
+.quiz-question {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 18px 0;
+}
+
+.quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quiz-result {
+  min-height: 28px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.video-box {
+  width: min(600px, 100%);
+  min-height: 170px;
+  margin: 22px auto;
+  padding: 30px;
+  border: 2px dashed #9bb395;
+  border-radius: 22px;
+  background: #f8f7eb;
+}
+
+.video-box video {
+  width: 100%;
+  max-height: 55vh;
+  border-radius: 12px;
+}
+
+.message {
+  font-size: clamp(18px, 3vw, 23px);
+  line-height: 1.9;
+  max-width: 720px;
+  margin: 25px auto;
+}
+
+.signature {
+  font-size: 25px;
+  color: var(--deep);
+  font-style: italic;
+}
+
+.footer-note {
+  font: 11px Arial, sans-serif;
+  opacity: .65;
+  margin-top: 16px;
+}
+
+@media (max-width: 650px) {
+  .page {
+    padding: 22px 14px;
+    min-height: 100vh;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .photo-card img {
+    height: 190px;
+  }
+
+  .paper {
+    padding: 20px 15px;
+  }
+
+  .page::before,
+  .page::after {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 370px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-card img {
+    height: 280px;
+  }
+}
 </style>
-
-
 </head>
 
 <body>
 
-<main id="app">
-
-
+<!-- PAGE 1: WELCOME -->
 <section class="page active" id="welcome">
-    <div class="garden-decoration flower-one">✿</div>
-    <div class="garden-decoration flower-two">❀</div>
-    <div class="garden-decoration flower-three">✿</div>
-
-    <p class="eyebrow">A LITTLE SOMETHING MADE WITH LOVE</p>
-
-    <h1>A Garden<br>Called Us</h1>
-
-    <p class="subtitle">One more year of growing together.</p>
-
-    <div class="flower-illustration">🌼</div>
-
-    <button type="button" class="next-button" id="beginButton">
-        Open Our Story →
-    </button>
-
-    <p class="bottom-note">Made just for you ♡</p>
-</section>
-
-<section class="page" id="memories">
-    <p class="eyebrow">CHAPTER ONE</p>
-    <h2>Our Little Memories</h2>
-
+  <div class="content">
+    <div class="flower">🌿</div>
+    <p class="eyebrow">A little garden of memories</p>
+    <h1>Our Little<br>Love Story</h1>
     <p class="subtitle">
-        Every little moment became a part of our story.
+      Some people make ordinary days feel magical.<br>
+      You made my world feel like home.
     </p>
-
-    <div class="memory-placeholder">
-        <span>🌿</span>
-        <p>Our memories will bloom here.</p>
-        <small>We'll add your photographs soon.</small>
+    <div class="paper">
+      <div class="flower">🌼</div>
+      <p>For my favourite person, my happiest place, and my forever love.</p>
     </div>
-
-    <button type="button" class="next-button" data-next="games">
-        Let's Play →
+    <button class="primary" onclick="goTo('memories')">
+      Open Our Story →
     </button>
+    <p class="footer-note">Made with love, just for you ♡</p>
+  </div>
 </section>
 
+<!-- PAGE 2: PHOTO MEMORIES -->
+<section class="page" id="memories">
+  <div class="content">
+    <p class="eyebrow">Chapter One</p>
+    <h2>Our Little Memories</h2>
+    <p class="subtitle">Every little moment became a part of our story.</p>
+
+    <div class="photo-grid">
+
+      <div class="photo-card">
+        <img src="photos/24196132-F1C2-4A4E-B1CF-BFF66A88378B.JPEG"
+             alt="A memory from when we first met">
+        <p>When I First Saw You</p>
+        <small>The beginning of something beautiful</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/First%20date.JPEG" alt="Our first date">
+        <p>Our First Date</p>
+        <small>A day I will always remember</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/IMG_8316.JPEG" alt="Our cute loving day">
+        <p>Our Cute, Loving Day</p>
+        <small>My favourite smile, my favourite person</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/Our%20first%20kiss%20day.JPEG" alt="Our first kiss">
+        <p>Our First Kiss</p>
+        <small>A moment close to my heart</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/anniversary.JPEG" alt="Our anniversary">
+        <p>Our Anniversary</p>
+        <small>Celebrating us</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/c583b661-ee9a-410f-80a4-4adf3247cd96.JPEG"
+             alt="A special memory together">
+        <p>A Special Memory</p>
+        <small>Just you and me</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/cinemadate1.JPEG" alt="Our cinema date">
+        <p>Our Cinema Date</p>
+        <small>Every plan is better with you</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/cinema%20date%203.JPEG" alt="Another cinema memory">
+        <p>Another Cinema Memory</p>
+        <small>More moments, more smiles</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/cinema%20date.JPEG" alt="Our cinema memories">
+        <p>Movie Time Together</p>
+        <small>My favourite movie partner</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/date.JPEG" alt="A day out together">
+        <p>One More Date</p>
+        <small>Anywhere feels special with you</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/date1.JPEG" alt="Another date together">
+        <p>Another Beautiful Day</p>
+        <small>Collecting little moments</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/first%20bunk.JPEG" alt="Our first bunk day">
+        <p>Our First Bunk</p>
+        <small>A little adventure of our own</small>
+      </div>
+
+      <div class="photo-card">
+        <img src="photos/parkdate.JPEG" alt="Our romantic park date">
+        <p>Our Romantic Park Date</p>
+        <small>Under the trees, beside you</small>
+      </div>
+
+    </div>
+
+    <button class="primary" onclick="goTo('games')">Let's Play →</button>
+  </div>
+</section>
+
+<!-- PAGE 3: COUPLE QUIZ -->
 <section class="page" id="games">
-    <p class="eyebrow">CHAPTER TWO</p>
-    <h2>A Little Garden Quiz</h2>
+  <div class="content">
+    <p class="eyebrow">Chapter Two</p>
+    <h2>A Little Love Quiz</h2>
+    <p class="subtitle">Let's see how well you remember our little world!</p>
 
-    <p class="subtitle">How well do you know our little world?</p>
-
-    <div class="quiz-card">
-        <p>Who is the most dramatic one in our relationship? 😂</p>
-
-        <div class="answer-buttons">
-            <button type="button" class="answer-button">
-                Me
-            </button>
-
-            <button type="button" class="answer-button">
-                You
-            </button>
-
-            <button type="button" class="answer-button">
-                Both of us!
-            </button>
-        </div>
-
-        <p id="quizFeedback" aria-live="polite"></p>
+    <div class="paper">
+      <div class="flower">🌱</div>
+      <div class="quiz-question" id="question">
+        What makes our moments so special?
+      </div>
+      <div class="quiz-options" id="options">
+        <button class="secondary" onclick="answer('wrong')">The places</button>
+        <button class="secondary" onclick="answer('right')">Being together</button>
+        <button class="secondary" onclick="answer('wrong')">The photographs</button>
+      </div>
+      <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+      <button class="primary" id="nextQuestion" onclick="nextQuiz()" hidden>
+        Next Question →
+      </button>
     </div>
 
-    <button type="button" class="next-button" data-next="dance">
-        One Last Surprise →
-    </button>
+    <button class="secondary" onclick="goTo('dance')">Skip to Our Dance →</button>
+  </div>
 </section>
 
+<!-- PAGE 4: DANCE VIDEO -->
 <section class="page" id="dance">
-    <p class="eyebrow">OUR FAVOURITE MOMENT</p>
-    <h2>Shall We Dance Again?</h2>
+  <div class="content">
+    <p class="eyebrow">Chapter Three</p>
+    <h2>Our Little Dance</h2>
+    <p class="subtitle">Every song feels a little sweeter when I think of you.</p>
 
-    <p class="subtitle">Some moments deserve to be relived.</p>
+    <div class="video-box">
+      <div class="flower">🎶</div>
+      <p><strong>Add your dance video here</strong></p>
+      <p>
+        Upload your video to the <code>photos</code> folder on GitHub,
+        then replace the video filename in the code.
+      </p>
 
-    <div class="video-placeholder">
-        <span>♫</span>
-        <p>Our dance video will go here.</p>
-        <small>We'll add your video soon.</small>
+      <!-- When you upload a video, replace YOUR-VIDEO.mp4 below -->
+      <video id="danceVideo" controls playsinline hidden>
+        <source src="photos/YOUR-VIDEO.mp4" type="video/mp4">
+        Your browser does not support this video.
+      </video>
     </div>
 
-    <button type="button" class="next-button" data-next="finale">
-        One Last Page →
+    <button class="primary" onclick="goTo('finale')">
+      One Last Surprise →
     </button>
+  </div>
 </section>
 
+<!-- PAGE 5: FINAL MESSAGE -->
 <section class="page" id="finale">
-    <p class="eyebrow">AND OUR STORY CONTINUES</p>
-    <h2>Forever in Bloom</h2>
+  <div class="content">
+    <div class="flower">🌿 🌼 🌿</div>
+    <p class="eyebrow">Our Next Chapter</p>
+    <h1>Happy Anniversary</h1>
 
-    <div class="final-flower">✿</div>
+    <div class="paper">
+      <p class="message">
+        My love, when I look back at our memories, I realise that the
+        smallest moments with you have become some of the biggest
+        treasures of my life.
+        <br><br>
+        From the day I first saw you to every date, every laugh,
+        every hug, and every little adventure, you have given me
+        memories I will carry in my heart.
+        <br><br>
+        I don't need every day to be perfect. I just want to keep
+        living these imperfect, beautiful days with you.
+        <br><br>
+        Thank you for being part of my story. If I could choose again,
+        I would still choose you.
+        <br><br>
+        Here's to more dates, more laughter, more adventures,
+        and a lifetime of loving you.
+      </p>
+      <div class="signature">Forever yours 💚</div>
+    </div>
 
-    <p class="final-message">
-        No matter how many seasons pass,<br>
-        I will always choose to grow with you.
-    </p>
-
-    <p class="subtitle">Happy Anniversary, my love. 🌿</p>
-
-    <button type="button" class="next-button" id="restartButton">
-        Relive Our Story ↻
+    <button class="primary" onclick="goTo('welcome')">
+      Read Our Story Again ↺
     </button>
+    <p class="footer-note">Our story is still blooming… 🌱</p>
+  </div>
 </section>
-
-
-</main>
 
 <script>
-(function () {
-    "use strict";
+function goTo(pageId) {
+  const pages = document.querySelectorAll('.page');
+  const target = document.getElementById(pageId);
 
-    function initializeWebsite() {
-        const pages = document.querySelectorAll(".page");
+  if (!target) return;
 
-        function showPage(pageId) {
-            const target = document.getElementById(pageId);
+  pages.forEach(function(page) {
+    page.classList.remove('active');
+  });
 
-            if (!target) {
-                alert("Page not found: " + pageId);
-                return;
-            }
+  target.classList.add('active');
+  target.scrollTop = 0;
+}
 
-            pages.forEach(function (page) {
-                page.classList.remove("active");
-            });
+const quizQuestions = [
+  {
+    question: "What makes our moments so special?",
+    options: ["The places", "Being together", "The photographs"],
+    correct: 1
+  },
+  {
+    question: "What would I choose for a perfect date?",
+    options: ["A day with you", "A day alone", "A day without plans"],
+    correct: 0
+  },
+  {
+    question: "What do I want more of in our future?",
+    options: ["More arguments", "More distance", "More memories with you"],
+    correct: 2
+  }
+];
 
-            target.classList.add("active");
-            window.scrollTo(0, 0);
-        }
+let quizIndex = 0;
 
-        document.getElementById("beginButton").onclick = function () {
-            showPage("memories");
-        };
+function renderQuiz() {
+  const item = quizQuestions[quizIndex];
+  document.getElementById('question').textContent = item.question;
+  document.getElementById('quizResult').textContent = '';
+  document.getElementById('nextQuestion').hidden = true;
 
-        document.querySelectorAll("[data-next]").forEach(function (button) {
-            button.onclick = function () {
-                showPage(button.getAttribute("data-next"));
-            };
-        });
+  const options = document.getElementById('options');
+  options.innerHTML = '';
 
-        document.getElementById("restartButton").onclick = function () {
-            showPage("welcome");
-        };
+  item.options.forEach(function(label, index) {
+    const button = document.createElement('button');
+    button.className = 'secondary';
+    button.textContent = label;
+    button.addEventListener('click', function() {
+      checkAnswer(index);
+    });
+    options.appendChild(button);
+  });
+}
 
-        const responses = [
-            "Haha! Someone's taking the blame! 😂🌿",
-            "We need to investigate that answer! 🌼",
-            "Two dramatic souls, one beautiful story! 🍃"
-        ];
+function checkAnswer(index) {
+  const item = quizQuestions[quizIndex];
+  const result = document.getElementById('quizResult');
 
-        document.querySelectorAll(".answer-button").forEach(function (button, index) {
-            button.onclick = function () {
-                document.getElementById("quizFeedback").textContent =
-                    responses[index];
-            };
-        });
-    }
+  if (index === item.correct) {
+    result.textContent = 'Correct! You know our love story. 💚';
+  } else {
+    result.textContent = 'Cute try! The best answer is: ' +
+      item.options[item.correct] + ' 🌿';
+  }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initializeWebsite);
-    } else {
-        initializeWebsite();
-    }
-})();
+  document.querySelectorAll('#options button').forEach(function(button) {
+    button.disabled = true;
+    button.style.opacity = '.7';
+  });
+
+  document.getElementById('nextQuestion').hidden = false;
+}
+
+function nextQuiz() {
+  quizIndex++;
+
+  if (quizIndex >= quizQuestions.length) {
+    document.getElementById('question').textContent =
+      "The best part of our story is that we're still writing it. 💚";
+    document.getElementById('options').innerHTML = '';
+    document.getElementById('quizResult').textContent =
+      'Your next adventure is waiting!';
+    document.getElementById('nextQuestion').hidden = true;
+
+    const button = document.createElement('button');
+    button.className = 'primary';
+    button.textContent = 'Our Dance →';
+    button.onclick = function() {
+      goTo('dance');
+    };
+    document.getElementById('options').appendChild(button);
+    return;
+  }
+
+  renderQuiz();
+}
+
+renderQuiz();
 </script>
 
 </body>
 </html>
+
