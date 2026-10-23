@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 "use strict";
 
-```
+
 // Find all website pages
 const pages = document.querySelectorAll(".page");
 
@@ -111,6 +111,6 @@ document.querySelectorAll("button").forEach(function (button) {
 showPage("welcome");
 
 console.log("🌿 A Garden Called Us is ready!");
-```
+
 
 });
