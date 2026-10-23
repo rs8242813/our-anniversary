@@ -390,3 +390,123 @@ iframe {
     }
 }
 
+css
+/* ===== FINAL PHOTO AND PAGE LAYOUT FIX ===== */
+
+/* Let the memories page use the available screen space */
+#memories.page.active {
+    display: flex !important;
+    min-height: 100vh;
+    height: auto;
+    padding: 18px 20px;
+    justify-content: flex-start;
+    overflow: visible;
+}
+
+/* Keep the gallery compact and centered */
+#memories .memory-grid,
+#memories .memories-grid,
+#memories .photo-grid,
+#memories .gallery,
+#memories #memoryGrid {
+    width: 100%;
+    max-width: 1000px;
+    margin: 12px auto;
+    gap: 10px;
+}
+
+/* Do not force landscape and portrait photos into the same crop */
+#memories .memory-card img,
+#memories .memory-item img,
+#memories .photo-card img,
+#memories .gallery-item img,
+#memories .memory-grid img,
+#memories .memories-grid img,
+#memories .photo-grid img,
+#memories .gallery img,
+#memories #memoryGrid img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    background: #e5ebdc;
+}
+
+/* Keep cards tidy */
+#memories .memory-card,
+#memories .memory-item,
+#memories .photo-card,
+#memories .gallery-item {
+    height: auto !important;
+    min-width: 0;
+    overflow: hidden;
+    padding: 6px;
+}
+
+/* Make headings and captions more compact */
+#memories .eyebrow {
+    margin: 4px 0 8px;
+}
+
+#memories h2 {
+    margin: 0 0 8px;
+    font-size: clamp(28px, 4vw, 42px);
+}
+
+#memories .subtitle {
+    margin: 0 0 12px;
+    font-size: 14px;
+}
+
+#memories .memory-card p,
+#memories .memory-item p,
+#memories .photo-card p,
+#memories .gallery-item p {
+    margin: 6px 2px 3px;
+    font-size: 12px;
+}
+
+#memories .memory-card small,
+#memories .memory-item small,
+#memories .photo-card small,
+#memories .gallery-item small {
+    font-size: 10px;
+}
+
+/* Phone layout */
+@media (max-width: 600px) {
+    #memories.page.active {
+        padding: 12px 8px;
+    }
+
+    #memories .memory-grid,
+    #memories .memories-grid,
+    #memories .photo-grid,
+    #memories .gallery,
+    #memories #memoryGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    #memories h2 {
+        font-size: 30px;
+    }
+
+    #memories .memory-card img,
+    #memories .memory-item img,
+    #memories .photo-card img,
+    #memories .gallery-item img,
+    #memories .memory-grid img,
+    #memories .memories-grid img,
+    #memories .photo-grid img,
+    #memories .gallery img,
+    #memories #memoryGrid img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
+    }
+}
+
