@@ -5,115 +5,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#DDE8D5">
-    <title>A Garden Called Us 🌿</title>
-    <link rel="stylesheet" href="style.css">
+
+```
+<title>A Garden Called Us 🌿</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+    .page {
+        display: none !important;
+    }
+
+    .page.active {
+        display: flex !important;
+    }
+
+    button {
+        position: relative;
+        z-index: 100;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .page.active {
+        animation: revealPage 0.5s ease;
+    }
+
+    @keyframes revealPage {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+```
+
 </head>
 
 <body>
-    <main id="app">
-        <section class="page active" id="welcome">
-            <div class="garden-decoration flower-one">✿</div>
-            <div class="garden-decoration flower-two">❀</div>
-            <div class="garden-decoration flower-three">✿</div>
+
+<main id="app">
 
 ```
-        <p class="eyebrow">A LITTLE SOMETHING MADE WITH LOVE</p>
+<section class="page active" id="welcome">
+    <div class="garden-decoration flower-one">✿</div>
+    <div class="garden-decoration flower-two">❀</div>
+    <div class="garden-decoration flower-three">✿</div>
 
-        <h1>A Garden<br>Called Us</h1>
+    <p class="eyebrow">A LITTLE SOMETHING MADE WITH LOVE</p>
 
-        <p class="subtitle">
-            One more year of growing together.
-        </p>
+    <h1>A Garden<br>Called Us</h1>
 
-        <div class="flower-illustration" aria-hidden="true">🌼</div>
+    <p class="subtitle">One more year of growing together.</p>
 
-        <button class="next-button" id="beginButton">
-            Open Our Story <span aria-hidden="true">→</span>
-        </button>
+    <div class="flower-illustration">🌼</div>
 
-        <p class="bottom-note">Made just for you ♡</p>
-    </section>
+    <button type="button" class="next-button" id="beginButton">
+        Open Our Story →
+    </button>
 
-    <section class="page" id="memories">
-        <p class="eyebrow">CHAPTER ONE</p>
-        <h2>Our Little Memories</h2>
-        <p class="subtitle">
-            Every little moment became a part of our story.
-        </p>
+    <p class="bottom-note">Made just for you ♡</p>
+</section>
 
-        <div class="memory-placeholder">
-            <span>🌿</span>
-            <p>Our memories will bloom here.</p>
-            <small>We'll add your photographs in a later step.</small>
+<section class="page" id="memories">
+    <p class="eyebrow">CHAPTER ONE</p>
+    <h2>Our Little Memories</h2>
+
+    <p class="subtitle">
+        Every little moment became a part of our story.
+    </p>
+
+    <div class="memory-placeholder">
+        <span>🌿</span>
+        <p>Our memories will bloom here.</p>
+        <small>We'll add your photographs soon.</small>
+    </div>
+
+    <button type="button" class="next-button" data-next="games">
+        Let's Play →
+    </button>
+</section>
+
+<section class="page" id="games">
+    <p class="eyebrow">CHAPTER TWO</p>
+    <h2>A Little Garden Quiz</h2>
+
+    <p class="subtitle">How well do you know our little world?</p>
+
+    <div class="quiz-card">
+        <p>Who is the most dramatic one in our relationship? 😂</p>
+
+        <div class="answer-buttons">
+            <button type="button" class="answer-button">
+                Me
+            </button>
+
+            <button type="button" class="answer-button">
+                You
+            </button>
+
+            <button type="button" class="answer-button">
+                Both of us!
+            </button>
         </div>
 
-        <button class="next-button" data-next="games">
-            Let's Play <span aria-hidden="true">→</span>
-        </button>
-    </section>
+        <p id="quizFeedback" aria-live="polite"></p>
+    </div>
 
-    <section class="page" id="games">
-        <p class="eyebrow">CHAPTER TWO</p>
-        <h2>A Little Garden Quiz</h2>
-        <p class="subtitle">How well do you know our little world?</p>
+    <button type="button" class="next-button" data-next="dance">
+        One Last Surprise →
+    </button>
+</section>
 
-        <div class="quiz-card">
-            <p id="question">Who is the most dramatic one in our relationship? 😂</p>
+<section class="page" id="dance">
+    <p class="eyebrow">OUR FAVOURITE MOMENT</p>
+    <h2>Shall We Dance Again?</h2>
 
-            <div class="answer-buttons">
-                <button class="answer-button">Me</button>
-                <button class="answer-button">You</button>
-                <button class="answer-button">Both of us!</button>
-            </div>
+    <p class="subtitle">Some moments deserve to be relived.</p>
 
-            <p id="quizFeedback" aria-live="polite"></p>
-        </div>
+    <div class="video-placeholder">
+        <span>♫</span>
+        <p>Our dance video will go here.</p>
+        <small>We'll add your video soon.</small>
+    </div>
 
-        <button class="next-button" data-next="dance">
-            One Last Surprise <span aria-hidden="true">→</span>
-        </button>
-    </section>
+    <button type="button" class="next-button" data-next="finale">
+        One Last Page →
+    </button>
+</section>
 
-    <section class="page" id="dance">
-        <p class="eyebrow">OUR FAVOURITE MOMENT</p>
-        <h2>Shall We Dance Again?</h2>
+<section class="page" id="finale">
+    <p class="eyebrow">AND OUR STORY CONTINUES</p>
+    <h2>Forever in Bloom</h2>
 
-        <p class="subtitle">
-            Some moments deserve to be relived.
-        </p>
+    <div class="final-flower">✿</div>
 
-        <div class="video-placeholder">
-            <span>♫</span>
-            <p>Our dance video will go here.</p>
-            <small>We'll add your video in a later step.</small>
-        </div>
+    <p class="final-message">
+        No matter how many seasons pass,<br>
+        I will always choose to grow with you.
+    </p>
 
-        <button class="next-button" data-next="finale">
-            One Last Page <span aria-hidden="true">→</span>
-        </button>
-    </section>
+    <p class="subtitle">Happy Anniversary, my love. 🌿</p>
 
-    <section class="page" id="finale">
-        <p class="eyebrow">AND OUR STORY CONTINUES</p>
-        <h2>Forever in Bloom</h2>
+    <button type="button" class="next-button" id="restartButton">
+        Relive Our Story ↻
+    </button>
+</section>
+```
 
-        <div class="final-flower" aria-hidden="true">✿</div>
-
-        <p class="final-message">
-            No matter how many seasons pass,<br>
-            I will always choose to grow with you.
-        </p>
-
-        <p class="subtitle">Happy Anniversary, my love. 🌿</p>
-
-        <button class="next-button" id="restartButton">
-            Relive Our Story ↻
-        </button>
-    </section>
 </main>
 
-<script src="script.js"></script>
-```
+<script>
+(function () {
+    "use strict";
+
+    function initializeWebsite() {
+        const pages = document.querySelectorAll(".page");
+
+        function showPage(pageId) {
+            const target = document.getElementById(pageId);
+
+            if (!target) {
+                alert("Page not found: " + pageId);
+                return;
+            }
+
+            pages.forEach(function (page) {
+                page.classList.remove("active");
+            });
+
+            target.classList.add("active");
+            window.scrollTo(0, 0);
+        }
+
+        document.getElementById("beginButton").onclick = function () {
+            showPage("memories");
+        };
+
+        document.querySelectorAll("[data-next]").forEach(function (button) {
+            button.onclick = function () {
+                showPage(button.getAttribute("data-next"));
+            };
+        });
+
+        document.getElementById("restartButton").onclick = function () {
+            showPage("welcome");
+        };
+
+        const responses = [
+            "Haha! Someone's taking the blame! 😂🌿",
+            "We need to investigate that answer! 🌼",
+            "Two dramatic souls, one beautiful story! 🍃"
+        ];
+
+        document.querySelectorAll(".answer-button").forEach(function (button, index) {
+            button.onclick = function () {
+                document.getElementById("quizFeedback").textContent =
+                    responses[index];
+            };
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeWebsite);
+    } else {
+        initializeWebsite();
+    }
+})();
+</script>
 
 </body>
 </html>
