@@ -1,1091 +1,993 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Little Forever 🌿</title>
-
-<style>
-:root {
-  --sage: #879b79;
-  --sage-dark: #53694c;
-  --sage-light: #e8eee3;
-  --cream: #faf9f3;
-  --paper: #ffffff;
-  --text: #384537;
-  --muted: #788174;
-  --border: #dfe6d9;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-button {
-  font: inherit;
-}
-
-.page {
-  display: none;
-  min-height: 100vh;
-  padding: 35px 20px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.page.active {
-  display: flex;
-}
-
-.container {
-  width: min(100%, 1000px);
-  margin: auto;
-}
-
-.hero {
-  text-align: center;
-  max-width: 760px;
-}
-
-.eyebrow {
-  color: var(--sage-dark);
-  font-family: Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-bottom: 20px;
-}
-
-h1, h2, h3, p {
-  margin-top: 0;
-}
-
-h1 {
-  font-size: clamp(38px, 7vw, 76px);
-  font-weight: normal;
-  line-height: 1.12;
-  margin-bottom: 22px;
-}
-
-h2 {
-  font-size: clamp(30px, 5vw, 48px);
-  font-weight: normal;
-  line-height: 1.2;
-  margin-bottom: 18px;
-}
-
-h3 {
-  font-weight: normal;
-}
-
-p {
-  line-height: 1.8;
-}
-
-.subtitle {
-  max-width: 600px;
-  margin: 0 auto 28px;
-  color: var(--muted);
-  font-size: 17px;
-}
-
-.small-note {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-button {
-  border: 0;
-  cursor: pointer;
-  transition: transform .2s, background .2s;
-}
-
-button:hover {
-  transform: translateY(-2px);
-}
-
-.primary-btn,
-.secondary-btn {
-  padding: 14px 24px;
-  border-radius: 30px;
-  margin: 6px;
-}
-
-.primary-btn {
-  color: white;
-  background: var(--sage-dark);
-}
-
-.primary-btn:hover {
-  background: #40543a;
-}
-
-.secondary-btn {
-  background: var(--sage-light);
-  color: var(--sage-dark);
-  border: 1px solid var(--border);
-}
-
-.button-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 25px;
-}
-
-.decorative-line {
-  width: 65px;
-  height: 1px;
-  background: var(--sage);
-  margin: 25px auto;
-}
-
-/* Welcome page */
-
-.welcome-card {
-  padding: clamp(25px, 6vw, 60px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: rgba(255,255,255,.65);
-  box-shadow: 0 12px 40px rgba(72, 89, 64, .06);
-}
-
-.leaf {
-  font-size: 40px;
-  margin-bottom: 18px;
-}
-
-/* Memory galleries */
-
-.memory-gallery {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 30px;
-}
-
-.memory-card {
-  background: var(--paper);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  padding: 9px;
-  overflow: hidden;
-  box-shadow: 0 5px 18px rgba(58, 74, 52, .05);
-}
-
-.memory-card img {
-  display: block;
-  width: 100%;
-  height: 190px;
-  object-fit: contain;
-  background: #f0f1eb;
-  border-radius: 8px;
-}
-
-.memory-caption {
-  padding: 12px 5px 7px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.memory-caption span {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 4px;
-  font-family: Arial, sans-serif;
-}
-
-/* Quiz */
-
-.quiz-card {
-  width: min(100%, 760px);
-  padding: clamp(22px, 5vw, 45px);
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: 0 12px 40px rgba(72, 89, 64, .06);
-}
-
-.quiz-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  color: var(--muted);
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  margin-bottom: 13px;
-}
-
-.progress-track {
-  height: 6px;
-  width: 100%;
-  background: var(--sage-light);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 30px;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0;
-  background: var(--sage);
-  border-radius: 10px;
-  transition: width .3s;
-}
-
-.quiz-question {
-  font-size: clamp(24px, 4vw, 34px);
-  line-height: 1.35;
-  font-weight: normal;
-  margin-bottom: 25px;
-}
-
-.quiz-options {
-  display: grid;
-  gap: 12px;
-}
-
-.quiz-option {
-  width: 100%;
-  padding: 15px 17px;
-  text-align: left;
-  color: var(--text);
-  background: #fbfcf8;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  line-height: 1.5;
-}
-
-.quiz-option:hover {
-  background: var(--sage-light);
-  border-color: var(--sage);
-}
-
-.quiz-option.selected {
-  background: var(--sage-light);
-  border: 2px solid var(--sage-dark);
-}
-
-.quiz-option:disabled {
-  cursor: default;
-  opacity: 1;
-}
-
-.quiz-feedback {
-  display: none;
-  background: #f2f5ed;
-  border-left: 3px solid var(--sage);
-  border-radius: 5px;
-  padding: 16px;
-  margin-top: 20px;
-  line-height: 1.7;
-}
-
-.quiz-feedback.show {
-  display: block;
-}
-
-.quiz-bottom {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 25px;
-}
-
-.quiz-bottom button {
-  margin: 0;
-}
-
-.result-card {
-  display: none;
-  text-align: center;
-  padding: 20px 0 5px;
-}
-
-.result-card.show {
-  display: block;
-}
-
-/* Dance page */
-
-.dance-card {
-  width: min(100%, 750px);
-  background: white;
-  padding: clamp(25px, 5vw, 45px);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  text-align: center;
-}
-
-.video-placeholder {
-  margin: 25px auto;
-  padding: 35px 20px;
-  background: var(--sage-light);
-  border-radius: 15px;
-  color: var(--sage-dark);
-}
-
-.video-placeholder .leaf {
-  font-size: 32px;
-}
-
-/* Finale */
-
-.final-card {
-  text-align: center;
-  width: min(100%, 760px);
-  padding: clamp(25px, 6vw, 60px);
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-}
-
-.final-message {
-  font-size: 19px;
-  line-height: 2;
-  max-width: 580px;
-  margin: 25px auto;
-}
-
-.signature {
-  font-style: italic;
-  color: var(--sage-dark);
-  font-size: 22px;
-  margin-top: 25px;
-}
-
-@media (max-width: 800px) {
-  .memory-gallery {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .memory-card img {
-    height: 170px;
-  }
-}
-
-@media (max-width: 520px) {
-  .page {
-    padding: 22px 13px;
-  }
-
-  .memory-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .memory-card {
-    padding: 6px;
-  }
-
-  .memory-card img {
-    height: 155px;
-  }
-
-  .memory-caption {
-    font-size: 13px;
-  }
-
-  .primary-btn,
-  .secondary-btn {
-    padding: 12px 18px;
-  }
-
-  .quiz-bottom {
-    flex-direction: column;
-  }
-
-  .quiz-bottom button {
-    width: 100%;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Little Forever 🌿</title>
+
+  <style>
+    :root {
+      --sage: #8da995;
+      --sage-dark: #536f5b;
+      --sage-light: #e4eee3;
+      --cream: #f8f8ef;
+      --white: #ffffff;
+      --text: #354c3b;
+      --muted: #728575;
+      --border: #d5e3d3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--cream);
+      color: var(--text);
+      text-align: center;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .top-decoration {
+      padding: 15px 10px 0;
+      color: var(--sage-dark);
+      font-size: 23px;
+      letter-spacing: 8px;
+    }
+
+    header {
+      padding: 18px 16px 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(30px, 6vw, 48px);
+      font-weight: normal;
+      color: var(--sage-dark);
+    }
+
+    header p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 8px;
+      background: rgba(248, 248, 239, 0.96);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    nav button {
+      border: 1px solid transparent;
+      border-radius: 22px;
+      padding: 9px 13px;
+      background: transparent;
+      color: var(--sage-dark);
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: var(--sage-light);
+      border-color: var(--border);
+    }
+
+    main {
+      min-height: 65vh;
+      padding: 24px 16px 50px;
+    }
+
+    .page {
+      display: none;
+      max-width: 1050px;
+      margin: 0 auto;
+      animation: appear 0.45s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      padding: 35px 15px 25px;
+    }
+
+    .eyebrow {
+      color: var(--sage-dark);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h2 {
+      margin: 14px 0;
+      font-size: clamp(29px, 5vw, 43px);
+      font-weight: normal;
+      color: var(--sage-dark);
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 15px auto 25px;
+      color: #65796a;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .decorative-line {
+      margin: 24px auto;
+      color: var(--sage);
+      letter-spacing: 10px;
+    }
+
+    .welcome-card,
+    .message-card,
+    .quiz-card,
+    .video-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 8px 28px rgba(74, 104, 79, 0.07);
+    }
+
+    .welcome-card {
+      max-width: 760px;
+      margin: 10px auto 25px;
+      padding: 35px 24px;
+    }
+
+    .welcome-card p {
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 21px;
+      border: 1px solid var(--sage);
+      border-radius: 25px;
+      background: var(--sage);
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--sage-dark);
+      border-color: var(--sage-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background: var(--sage-light);
+      color: var(--sage-dark);
+    }
+
+    .btn.secondary:hover {
+      background: #d4e3d3;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 17px;
+      margin: 28px auto;
+    }
+
+    .photo-card {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      box-shadow: 0 5px 16px rgba(74, 104, 79, 0.07);
+      transition: transform 0.2s;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 230px;
+      padding: 7px;
+      object-fit: contain;
+      background: #f1f5ed;
+    }
+
+    .photo-caption {
+      padding: 13px 8px 16px;
+      color: var(--sage-dark);
+      font-size: 15px;
+    }
+
+    .photo-card img:not([src]) {
+      display: none;
+    }
+
+    .photo-card img[src=""] {
+      display: none;
+    }
+
+    .message-card {
+      max-width: 760px;
+      margin: 25px auto;
+      padding: 30px 25px;
+    }
+
+    .message-card p {
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .quiz-card {
+      max-width: 720px;
+      margin: 25px auto;
+      padding: 28px 24px;
+      text-align: left;
+    }
+
+    .progress-text {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .progress-track {
+      height: 7px;
+      margin: 15px 0 25px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--sage-light);
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--sage);
+      transition: width 0.3s;
+    }
+
+    #question {
+      font-size: 23px;
+      line-height: 1.5;
+      color: var(--sage-dark);
+      text-align: center;
+    }
+
+    #options {
+      display: grid;
+      gap: 11px;
+      margin: 25px 0;
+    }
+
+    .option {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #fbfcf8;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover:not(:disabled) {
+      background: var(--sage-light);
+      border-color: var(--sage);
+    }
+
+    .option.correct {
+      background: #e0eee0;
+      border-color: #7b9d7d;
+    }
+
+    .option.incorrect {
+      background: #f0f1e8;
+      border-color: #a4ad94;
+    }
+
+    .option:disabled {
+      cursor: default;
+    }
+
+    #feedback {
+      min-height: 28px;
+      color: var(--sage-dark);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    #quizResult {
+      display: none;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    #quizResult h3 {
+      font-size: 28px;
+      font-weight: normal;
+      color: var(--sage-dark);
+    }
+
+    .video-card {
+      max-width: 850px;
+      margin: 25px auto;
+      padding: 20px;
+    }
+
+    .video-frame {
+      width: 100%;
+      max-height: 65vh;
+      display: block;
+      margin: 0 auto;
+      border-radius: 15px;
+      background: #edf2e9;
+      object-fit: contain;
+    }
+
+    .video-note {
+      margin: 20px auto 5px;
+      max-width: 650px;
+      line-height: 1.9;
+      color: #65796a;
+    }
+
+    .finale {
+      padding: 30px 15px;
+    }
+
+    .finale h2 {
+      font-size: clamp(34px, 6vw, 53px);
+    }
+
+    .finale-message {
+      max-width: 680px;
+      margin: 25px auto;
+      font-size: 19px;
+      line-height: 2;
+    }
+
+    footer {
+      padding: 22px 15px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 850px) {
+      .gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .photo-card img {
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding-top: 12px;
+      }
+
+      nav {
+        gap: 4px;
+        padding: 9px 5px;
+      }
+
+      nav button {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 15px 11px 35px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+      }
+
+      .photo-card img {
+        height: 190px;
+      }
+
+      .photo-caption {
+        font-size: 13px;
+      }
+
+      .welcome-card,
+      .message-card,
+      .quiz-card,
+      .video-card {
+        padding: 22px 15px;
+        border-radius: 18px;
+      }
+
+      #question {
+        font-size: 20px;
+      }
+
+      .intro {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="top-decoration">❧ ✿ ❧</div>
 
-<!-- PAGE 1: WELCOME -->
+  <header>
+    <h1>Our Little Forever</h1>
+    <p>A little website for a love that means everything</p>
+  </header>
 
-<section class="page active" id="welcome">
-  <div class="container hero">
-    <div class="welcome-card">
-      <div class="leaf">🌿</div>
-      <div class="eyebrow">A little place made just for us</div>
-      <h1>Our Little<br>Forever</h1>
-      <div class="decorative-line"></div>
-      <p class="subtitle">
-        For every first, every little moment, every laugh,
-        every lesson, and every beautiful day still waiting for us.
-      </p>
-      <p class="small-note">A little journey through our story.</p>
-      <button class="primary-btn" onclick="showPage('memories1')">
-        Open our story →
-      </button>
-    </div>
-  </div>
-</section>
+  <nav aria-label="Website navigation">
+    <button class="active" data-page="welcome" onclick="showPage('welcome', this)">Welcome</button>
+    <button data-page="memories1" onclick="showPage('memories1', this)">Our Memories I</button>
+    <button data-page="memories2" onclick="showPage('memories2', this)">Our Memories II</button>
+    <button data-page="quiz" onclick="showPage('quiz', this)">Our Little Quiz</button>
+    <button data-page="dance" onclick="showPage('dance', this)">Our Dance</button>
+    <button data-page="finale" onclick="showPage('finale', this)">Forever Us</button>
+  </nav>
 
-<!-- PAGE 2: MEMORIES 1 -->
+  <main>
+    <!-- WELCOME PAGE -->
+    <section id="welcome" class="page active">
+      <div class="hero">
+        <div class="eyebrow">A little celebration of us</div>
+        <h2>To My Favourite Person 🌿</h2>
 
-<section class="page" id="memories1">
-  <div class="container">
-    <div class="eyebrow">Chapter One · Where it began</div>
-    <h2>Little moments,<br>big memories.</h2>
-    <p class="subtitle" style="margin-left:0">
-      Some days become special without us even realizing it.
-    </p>
-
-    <div class="memory-gallery">
-
-      <article class="memory-card">
-        <img src="photos/24196132-F1C2-4A4E-B1CF-BFF66A88378B.JPEG"
-             alt="A special early memory"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          The first time I saw you
-          <span>Where our story began</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/First date.JPEG"
-             alt="Our first date"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Our first date
-          <span>A day worth remembering</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/IMG_8316.JPEG"
-             alt="A special memory together"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          A moment with you
-          <span>One of my favourites</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/Our first kiss day.JPEG"
-             alt="Our first kiss day"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Our first kiss
-          <span>A moment just for us</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/anniversary.JPEG"
-             alt="Our anniversary"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Our first anniversary
-          <span>One year of us</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/c583b661-ee9a-410f-80a4-4adf3247cd96.JPEG"
-             alt="Our anniversary memory"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Another anniversary memory
-          <span>Growing together</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/first bunk.JPEG"
-             alt="Our first bunk from an exam"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Our first exam bunk
-          <span>Choosing a little adventure</span>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="button-row">
-      <button class="secondary-btn" onclick="showPage('welcome')">
-        ← Back
-      </button>
-      <button class="primary-btn" onclick="showPage('memories2')">
-        More memories →
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- PAGE 3: MEMORIES 2 -->
-
-<section class="page" id="memories2">
-  <div class="container">
-    <div class="eyebrow">Chapter Two · The little things</div>
-    <h2>More of my<br>favourite memories.</h2>
-    <p class="subtitle" style="margin-left:0">
-      The ordinary days become extraordinary when I'm with you.
-    </p>
-
-    <div class="memory-gallery">
-
-      <article class="memory-card">
-        <img src="photos/cinemadate1.JPEG"
-             alt="A cinema date"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Our cinema date
-          <span>Lights, camera, us</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/cinema date 3.JPEG"
-             alt="A cinema date memory"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          Cute loving day
-          <span>One for the memories</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/cinema date.JPEG"
-             alt="A memory from our date"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          A little happiness
-          <span>Just being together</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/date.JPEG"
-             alt="A romantic date"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          A romantic date
-          <span>You and me</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/date1.JPEG"
-             alt="Another romantic date"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          A day to keep
-          <span>Our own little world</span>
-        </div>
-      </article>
-
-      <article class="memory-card">
-        <img src="photos/parkdate.JPEG"
-             alt="A day at the park"
-             onerror="this.style.display='none'">
-        <div class="memory-caption">
-          A peaceful day together
-          <span>My favourite company</span>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="button-row">
-      <button class="secondary-btn" onclick="showPage('memories1')">
-        ← Previous memories
-      </button>
-      <button class="primary-btn" onclick="showPage('games')">
-        Let's talk about us →
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- PAGE 4: DEEP COUPLE QUIZ -->
-
-<section class="page" id="games">
-  <div class="container">
-    <div class="eyebrow">Chapter Three · Just between us</div>
-    <h2>How well do we<br>understand each other?</h2>
-    <p class="subtitle">
-      Fifteen thoughtful questions about love, communication,
-      memories, and the future we imagine together.
-    </p>
-
-    <div class="quiz-card" id="quizCard">
-
-      <div id="quizContent">
-        <div class="quiz-top">
-          <span id="deepProgress">Question 1 of 15</span>
-          <span id="deepCategory">Getting to know us</span>
-        </div>
-
-        <div class="progress-track">
-          <div class="progress-fill" id="deepProgressBar"></div>
-        </div>
-
-        <h3 class="quiz-question" id="deepQuestion">
-          Loading our first question...
-        </h3>
-
-        <div class="quiz-options" id="deepOptions"></div>
-
-        <div class="quiz-feedback" id="deepFeedback"></div>
-
-        <div class="quiz-bottom">
-          <button class="secondary-btn" onclick="previousDeepQuestion()" id="deepBack">
-            ← Previous
-          </button>
-
-          <button class="primary-btn" onclick="nextDeepQuestion()" id="deepNext" disabled>
-            Next question →
-          </button>
-        </div>
-
-        <p class="small-note" style="margin:20px 0 0">
-          There are no wrong answers here. Choose what feels most like you,
-          then talk about your answer together.
+        <p class="intro">
+          Some people make ordinary days feel extraordinary.
+          You are that person for me. This little corner of the internet
+          is a collection of our moments, our laughter, and our love.
         </p>
+
+        <div class="decorative-line">✿ ❧ ✿</div>
       </div>
 
-      <div class="result-card" id="deepResult">
-        <div class="leaf">🌿</div>
-        <div class="eyebrow">You made it through</div>
-        <h2>Love is a conversation.</h2>
-        <p class="final-message">
-          The best part of a relationship isn't knowing every answer.
-          It's staying curious about each other, listening with care,
-          and choosing to keep learning together.
-        </p>
+      <div class="welcome-card">
+        <h2>Our Story, One Memory at a Time</h2>
+
         <p>
-          Pick a question you both found interesting and talk about it
-          without rushing to fix anything. Sometimes listening is the
-          most loving answer.
+          From our first moments together to all the little things
+          that became special, every memory has a place in my heart.
         </p>
+
+        <p>
+          So take my hand, explore our memories, answer a few questions,
+          and let's relive a little piece of our story. 💚
+        </p>
+
         <div class="button-row">
-          <button class="secondary-btn" onclick="restartDeepQuiz()">
-            Start again
-          </button>
-          <button class="primary-btn" onclick="showPage('dance')">
-            One more surprise →
-          </button>
+          <button class="btn" onclick="showPage('memories1')">Explore Our Memories</button>
+          <button class="btn secondary" onclick="showPage('dance')">Watch Our Dance</button>
         </div>
       </div>
+    </section>
 
-    </div>
-
-    <div class="button-row">
-      <button class="secondary-btn" onclick="showPage('memories2')">
-        ← Back to memories
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- PAGE 5: DANCE / SPECIAL SURPRISE -->
-
-<section class="page" id="dance">
-  <div class="container">
-    <div class="dance-card">
-      <div class="eyebrow">Chapter Four · A little surprise</div>
-      <h2>One song.<br>Two hearts. Our story.</h2>
-
-      <p class="subtitle">
-        Some feelings are easier to express through a song than through words.
-      </p>
-
-      <div class="video-placeholder">
-        <div class="leaf">♪</div>
-        <h3>A song for us</h3>
-        <p>
-          Add your favourite song or a video of your special dance here.
+    <!-- MEMORIES PAGE ONE -->
+    <section id="memories1" class="page">
+      <div class="hero">
+        <div class="eyebrow">The beginning of us</div>
+        <h2>Little Moments, Big Memories</h2>
+        <p class="intro">
+          Every beginning has a little magic of its own.
+          These are some of the moments that started our story.
         </p>
-        <p class="small-note">
-          This is a placeholder; your dance video hasn't been added yet.
+      </div>
+
+      <div class="gallery">
+        <article class="photo-card">
+          <img src="photos/First%20date.JPEG" alt="Our first date" loading="lazy">
+          <div class="photo-caption">Our First Date</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/24196132-F1C2-4A4E-B1CF-BFF66A88378B.JPEG" alt="A memory together" loading="lazy">
+          <div class="photo-caption">A Moment to Remember</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/IMG_8316.JPEG" alt="A special day together" loading="lazy">
+          <div class="photo-caption">Just Us</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/Our%20first%20kiss%20day.JPEG" alt="Our first kiss day" loading="lazy">
+          <div class="photo-caption">Our First Kiss Day</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/first%20bunk.JPEG" alt="Our first bunk" loading="lazy">
+          <div class="photo-caption">Our First Bunk</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/date.JPEG" alt="A date together" loading="lazy">
+          <div class="photo-caption">A Little Date</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/date1.JPEG" alt="Another date memory" loading="lazy">
+          <div class="photo-caption">Another Lovely Day</div>
+        </article>
+      </div>
+
+      <div class="button-row">
+        <button class="btn secondary" onclick="showPage('welcome')">Back to Welcome</button>
+        <button class="btn" onclick="showPage('memories2')">More Memories →</button>
+      </div>
+    </section>
+
+    <!-- MEMORIES PAGE TWO -->
+    <section id="memories2" class="page">
+      <div class="hero">
+        <div class="eyebrow">And the story keeps growing</div>
+        <h2>More Pieces of Our Little World</h2>
+        <p class="intro">
+          The places we've been, the days we've shared,
+          and the memories I would choose all over again.
+        </p>
+      </div>
+
+      <div class="gallery">
+        <article class="photo-card">
+          <img src="photos/anniversary.JPEG" alt="Our anniversary" loading="lazy">
+          <div class="photo-caption">Our Anniversary</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/c583b661-ee9a-410f-80a4-4adf3247cd96.JPEG" alt="A favourite memory" loading="lazy">
+          <div class="photo-caption">A Favourite Memory</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/cinemadate1.JPEG" alt="Our cinema date" loading="lazy">
+          <div class="photo-caption">Cinema Date</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/cinema%20date%203.JPEG" alt="A cinema date memory" loading="lazy">
+          <div class="photo-caption">Movie-Time Memories</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/cinema%20date.JPEG" alt="Another cinema date" loading="lazy">
+          <div class="photo-caption">Another Movie Date</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/parkdate.JPEG" alt="Our park date" loading="lazy">
+          <div class="photo-caption">Our Park Date</div>
+        </article>
+
+        <article class="photo-card">
+          <img src="photos/date1.JPEG" alt="A happy day together" loading="lazy">
+          <div class="photo-caption">A Day With You</div>
+        </article>
+      </div>
+
+      <div class="message-card">
+        <h2>My Favourite Part?</h2>
+        <p>
+          It isn't just the places we go or the pictures we take.
+          It's the person beside me in them. You make the little things
+          matter, and that's what makes these memories ours.
         </p>
       </div>
 
       <div class="button-row">
-        <button class="secondary-btn" onclick="showPage('games')">
-          ← Back to our questions
-        </button>
-        <button class="primary-btn" onclick="showPage('finale')">
-          Read my little letter →
-        </button>
+        <button class="btn secondary" onclick="showPage('memories1')">← Previous Memories</button>
+        <button class="btn" onclick="showPage('quiz')">Let's Play a Little Quiz</button>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- PAGE 6: FINALE -->
-
-<section class="page" id="finale">
-  <div class="container">
-    <div class="final-card">
-      <div class="leaf">🌿</div>
-      <div class="eyebrow">A little letter from my heart</div>
-      <h2>My favourite part<br>is still you.</h2>
-
-      <div class="decorative-line"></div>
-
-      <div class="final-message">
-        <p>
-          When I look back at all our memories, I don't just see photos
-          or special days. I see the little moments that slowly became
-          a beautiful part of my life.
+    <!-- FIVE-QUESTION QUIZ -->
+    <section id="quiz" class="page">
+      <div class="hero">
+        <div class="eyebrow">How well do we remember us?</div>
+        <h2>Our Little Couple Quiz 🌿</h2>
+        <p class="intro">
+          Five little questions about our story.
+          Let's see how many you get right!
         </p>
+      </div>
 
-        <p>
-          I love the memories we've made, the things we've learned,
-          the laughter we've shared, and even the little things that
-          only we understand.
+      <div class="quiz-card">
+        <div id="quizGame">
+          <div class="progress-text" id="progressText">Question 1 of 5</div>
+
+          <div class="progress-track">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <h3 id="question"></h3>
+          <div id="options"></div>
+          <p id="feedback" aria-live="polite"></p>
+
+          <div class="button-row">
+            <button id="nextButton" class="btn" onclick="nextQuestion()" disabled>
+              Next Question →
+            </button>
+          </div>
+        </div>
+
+        <div id="quizResult">
+          <div class="decorative-line">✿ ❧ ✿</div>
+          <h3 id="resultTitle">Our Little Love Story</h3>
+          <p id="resultMessage"></p>
+          <p id="resultScore"></p>
+
+          <div class="button-row">
+            <button class="btn" onclick="restartQuiz()">Play Again</button>
+            <button class="btn secondary" onclick="showPage('dance')">Watch Our Dance</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="intro" style="font-size:14px;">
+        P.S. You can change the questions and answers in the code
+        to match your real memories.
+      </p>
+    </section>
+
+    <!-- DANCE VIDEO PAGE -->
+    <section id="dance" class="page">
+      <div class="hero">
+        <div class="eyebrow">One song, two hearts</div>
+        <h2>Our Little Dance 💃🏻</h2>
+        <p class="intro">
+          Some memories are captured in pictures.
+          Others live in the way we move, laugh, and share a moment together.
+          This one is ours.
         </p>
+      </div>
 
-        <p>
-          I don't expect every day to be perfect. I just hope we keep
-          choosing each other, keep talking honestly, keep laughing
-          together, and keep making memories in our own way.
+      <div class="video-card">
+        <video
+          class="video-frame"
+          controls
+          playsinline
+          preload="metadata"
+          poster="photos/anniversary.JPEG"
+        >
+          <source src="photos/our-dance.mp4" type="video/mp4">
+          Sorry, your browser doesn't support this video.
+          Please try opening this page in an updated browser.
+        </video>
+
+        <p class="video-note">
+          Our dance, our laughter, our little world.
+          No matter how many times we watch it, I hope it always reminds
+          us how beautiful it feels to share a moment together. 💚
         </p>
+      </div>
 
+      <div class="message-card">
+        <h2>Save Me Another Dance?</h2>
         <p>
-          No matter how much our story grows, I hope we never stop
-          being curious about each other.
+          Wherever life takes us, I hope there will always be another song,
+          another silly dance, and another reason to smile together.
         </p>
+      </div>
 
-        <p>
+      <div class="button-row">
+        <button class="btn secondary" onclick="showPage('memories2')">Our Memories</button>
+        <button class="btn" onclick="showPage('finale')">One Last Little Surprise →</button>
+      </div>
+    </section>
+
+    <!-- FINALE -->
+    <section id="finale" class="page">
+      <div class="finale">
+        <div class="decorative-line">❧ ✿ ❧</div>
+        <div class="eyebrow">And, always, you</div>
+
+        <h2>Here's to Our Forever</h2>
+
+        <p class="finale-message">
+          If I could collect every happy moment we've shared and keep it
+          in one place, it would look a little like this website.
+          <br><br>
+          But the best part isn't the pictures, the dates, or even the
+          memories we've already made.
+          <br><br>
+          It's knowing there are still so many ordinary days to turn
+          into extraordinary memories, so many places to explore,
+          and so many little moments waiting for us.
+          <br><br>
           Thank you for being part of my story.
           Here's to everything we've been, everything we are,
           and everything we still get to become.
+          <br><br>
+          <strong>Today, tomorrow, and all the little days after. 💚</strong>
         </p>
+
+        <div class="decorative-line">✿ ❧ ✿</div>
+
+        <div class="button-row">
+          <button class="btn" onclick="showPage('welcome')">Start Our Story Again</button>
+          <button class="btn secondary" onclick="showPage('dance')">One More Dance</button>
+        </div>
       </div>
+    </section>
+  </main>
 
-      <div class="signature">Always, with love. 🌿</div>
+  <footer>
+    Made with love, memories, and a little bit of green. 🌿
+    <br>
+    Our little world, just for us.
+  </footer>
 
-      <div class="button-row">
-        <button class="secondary-btn" onclick="showPage('welcome')">
-          Start our story again
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+  <script>
+    // PAGE NAVIGATION
+    function showPage(pageId, clickedButton) {
+      document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+      });
 
-<script>
-/* PAGE NAVIGATION */
+      const target = document.getElementById(pageId);
 
-function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(function(page) {
-    page.classList.remove('active');
-  });
+      if (target) {
+        target.classList.add("active");
+      }
 
-  const target = document.getElementById(pageId);
+      document.querySelectorAll("nav button").forEach(function(button) {
+        button.classList.toggle("active", button.dataset.page === pageId);
+      });
 
-  if (target) {
-    target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-}
-
-/* FIFTEEN DEEP COUPLE QUESTIONS */
-
-const deepQuestions = [
-  {
-    category: "Emotional connection",
-    question: "When you have had a difficult day, what kind of love helps you most?",
-    options: [
-      "Someone who listens without trying to fix everything",
-      "A hug, affection, and quiet reassurance",
-      "Practical help that makes the day easier",
-      "A little space first, followed by a caring conversation"
-    ],
-    reflection: "Knowing how someone needs to be loved on a difficult day can make a real difference. Ask each other what support feels best when life gets heavy."
-  },
-  {
-    category: "Feeling understood",
-    question: "What makes you feel most understood by your partner?",
-    options: [
-      "When they remember small details I once mentioned",
-      "When they listen without judging me",
-      "When they notice my feelings even when I struggle to explain them",
-      "When they accept my point of view even if theirs is different"
-    ],
-    reflection: "Feeling understood is not always about agreeing. Sometimes it's about feeling safe enough to be honest and knowing your feelings will be taken seriously."
-  },
-  {
-    category: "Handling disagreements",
-    question: "When we disagree, what would help us come back to each other?",
-    options: [
-      "Taking a short break and returning when we are calmer",
-      "Talking it through gently before going to sleep",
-      "Hearing an honest apology and seeing changed behaviour",
-      "Being reminded that we are on the same team"
-    ],
-    reflection: "Every couple handles disagreements differently. Talk about what helps each of you feel safe, respected, and ready to reconnect after an argument."
-  },
-  {
-    category: "Little things",
-    question: "Which everyday gesture would make you feel especially loved?",
-    options: [
-      "A thoughtful message during a busy day",
-      "Unexpected quality time together",
-      "Remembering something important to me",
-      "A small act of help without being asked"
-    ],
-    reflection: "Love often lives in the small, repeatable things. Tell each other one little gesture you would love to receive more often."
-  },
-  {
-    category: "Our beginnings",
-    question: "When you think about the beginning of our story, what feels most special?",
-    options: [
-      "The excitement of getting to know each other",
-      "The first time I realised my feelings were becoming serious",
-      "The little nervous moments that became funny memories",
-      "The way something ordinary slowly became important"
-    ],
-    reflection: "The same beginning can mean different things to two people. Share the moment when this relationship started to feel special to you."
-  },
-  {
-    category: "Feeling appreciated",
-    question: "What do you sometimes wish your partner noticed more about you?",
-    options: [
-      "The effort I put into our relationship",
-      "The feelings I keep to myself",
-      "The little things I do to make their life easier",
-      "The ways I am growing and trying to improve"
-    ],
-    reflection: "This question is an invitation to understand each other, not to criticise. Listen carefully, and ask how you can show that appreciation more clearly."
-  },
-  {
-    category: "Trust",
-    question: "What helps you feel most secure and trusting in a relationship?",
-    options: [
-      "Honesty, even when the conversation is uncomfortable",
-      "Consistency between words and actions",
-      "Freedom to be myself without fear of judgement",
-      "Knowing we can discuss worries without being dismissed"
-    ],
-    reflection: "Trust grows through small actions over time. Talk about what builds trust for each of you and what you can do to protect it."
-  },
-  {
-    category: "Quality time",
-    question: "If we had a whole day together with no responsibilities, what would you want most?",
-    options: [
-      "Going somewhere new and making a fresh memory",
-      "Staying in, talking, eating, and relaxing together",
-      "Revisiting a place connected to one of our memories",
-      "Doing something spontaneous and letting the day unfold"
-    ],
-    reflection: "The perfect day doesn't need to be expensive or elaborate. Plan a day that includes something each of you genuinely enjoys."
-  },
-  {
-    category: "Love and communication",
-    question: "If you found it hard to explain your feelings, what would help you open up?",
-    options: [
-      "Gentle questions without pressure",
-      "Knowing I can take my time to find the words",
-      "Being reassured that honesty won't automatically start a fight",
-      "Writing my thoughts down before talking"
-    ],
-    reflection: "People express feelings in different ways. Ask each other how to make difficult conversations feel more comfortable and less overwhelming."
-  },
-  {
-    category: "Growing together",
-    question: "What is one thing you hope we become better at as a couple?",
-    options: [
-      "Communicating our needs clearly",
-      "Making more intentional time for each other",
-      "Handling stressful situations as a team",
-      "Showing appreciation instead of assuming it is understood"
-    ],
-    reflection: "Growth does not mean that your relationship is failing. It means you care enough to keep learning. Choose one small habit you can practise together."
-  },
-  {
-    category: "Support and dreams",
-    question: "When you imagine pursuing a big personal dream, what support would mean the most?",
-    options: [
-      "Encouragement when I start doubting myself",
-      "Practical help with planning and problem-solving",
-      "Patience while I make mistakes and learn",
-      "Someone who celebrates progress, not just the final result"
-    ],
-    reflection: "Supporting someone does not always mean giving advice. Ask what support looks like for each of you when pursuing something important."
-  },
-  {
-    category: "Our future",
-    question: "What would make our future together feel meaningful to you?",
-    options: [
-      "Building a peaceful, comfortable life together",
-      "Exploring new places and having adventures",
-      "Growing individually while staying connected",
-      "Creating traditions and little rituals that belong to us"
-    ],
-    reflection: "You don't need identical dreams to build a life together. Share what matters most to you and find the hopes you want to nurture together."
-  },
-  {
-    category: "Being there",
-    question: "If one of us felt distant or overwhelmed, what would be the most loving first step?",
-    options: [
-      "Ask gently what is going on without making assumptions",
-      "Offer affection and remind them they are not alone",
-      "Give them space while making it clear I am available",
-      "Ask whether they want listening, advice, or practical help"
-    ],
-    reflection: "The most caring response is often the one that matches what the other person needs. You can ask directly instead of guessing."
-  },
-  {
-    category: "Our special bond",
-    question: "Which part of our relationship would you most want to protect as life gets busier?",
-    options: [
-      "Our ability to laugh together",
-      "Our honest conversations",
-      "Our affection and little romantic gestures",
-      "Our habit of making time for each other"
-    ],
-    reflection: "Busy seasons can change routines, but small rituals can help you stay connected. Choose one thing you want to keep making time for."
-  },
-  {
-    category: "A deeper promise",
-    question: "Years from now, what do you hope we can say about the way we loved each other?",
-    options: [
-      "We made each other feel safe to be ourselves",
-      "We kept choosing kindness, even during difficult times",
-      "We helped each other grow without holding each other back",
-      "We never stopped laughing, learning, and making memories"
-    ],
-    reflection: "There is no perfect answer. The important part is the kind of relationship you both want to build. Share one promise you would like to practise in everyday life."
-  }
-];
-
-let deepIndex = 0;
-let deepAnswers = new Array(deepQuestions.length).fill(null);
-
-function renderDeepQuestion() {
-  const question = deepQuestions[deepIndex];
-
-  document.getElementById('deepProgress').textContent =
-    'Question ' + (deepIndex + 1) + ' of ' + deepQuestions.length;
-
-  document.getElementById('deepCategory').textContent = question.category;
-
-  document.getElementById('deepProgressBar').style.width =
-    ((deepIndex + 1) / deepQuestions.length * 100) + '%';
-
-  document.getElementById('deepQuestion').textContent = question.question;
-
-  const optionsContainer = document.getElementById('deepOptions');
-  optionsContainer.innerHTML = '';
-
-  question.options.forEach(function(option, optionIndex) {
-    const button = document.createElement('button');
-
-    button.className = 'quiz-option';
-    button.textContent = option;
-
-    if (deepAnswers[deepIndex] === optionIndex) {
-      button.classList.add('selected');
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
 
-    button.addEventListener('click', function() {
-      chooseDeepAnswer(optionIndex);
-    });
+    // COUPLE QUIZ
+    // Edit these five questions to match your own story.
+    // The correct answer is the zero-based position in the options array.
+    const questions = [
+      {
+        question: "Which memory should we always keep close to our hearts?",
+        options: [
+          "Our first date",
+          "Our first movie together",
+          "Our first park date",
+          "Every moment together"
+        ],
+        correct: 3,
+        message: "Every little moment becomes special when it's with you. 💚"
+      },
+      {
+        question: "What makes an ordinary day feel special?",
+        options: [
+          "A fancy place",
+          "A perfect photograph",
+          "Spending time together",
+          "An expensive gift"
+        ],
+        correct: 2,
+        message: "It's the company, not the occasion, that matters most. 🌿"
+      },
+      {
+        question: "Which kind of date sounds most like our memories?",
+        options: [
+          "A cinema date",
+          "A park date",
+          "A quiet day together",
+          "All of these"
+        ],
+        correct: 3,
+        message: "It's not about where we go. It's about being together. ✨"
+      },
+      {
+        question: "What is the best thing about our dance video?",
+        options: [
+          "The perfect steps",
+          "The music alone",
+          "The memory we made",
+          "How quickly it ends"
+        ],
+        correct: 2,
+        message: "The memory is what makes it ours. 💃🏻"
+      },
+      {
+        question: "What do I hope for in our future?",
+        options: [
+          "More adventures together",
+          "More reasons to laugh",
+          "More memories to treasure",
+          "All of the above"
+        ],
+        correct: 3,
+        message: "Here's to a lifetime of little moments and big memories. 💚"
+      }
+    ];
 
-    optionsContainer.appendChild(button);
-  });
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
 
-  const feedback = document.getElementById('deepFeedback');
-  feedback.classList.remove('show');
-  feedback.textContent = '';
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const feedbackElement = document.getElementById("feedback");
+    const nextButton = document.getElementById("nextButton");
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
 
-  document.getElementById('deepBack').disabled = deepIndex === 0;
-  document.getElementById('deepBack').style.opacity =
-    deepIndex === 0 ? '0.45' : '1';
+    function loadQuestion() {
+      answered = false;
 
-  const nextButton = document.getElementById('deepNext');
-  nextButton.disabled = deepAnswers[deepIndex] === null;
-  nextButton.textContent =
-    deepIndex === deepQuestions.length - 1
-      ? 'Finish our questions →'
-      : 'Next question →';
-}
+      const item = questions[currentQuestion];
 
-function chooseDeepAnswer(optionIndex) {
-  deepAnswers[deepIndex] = optionIndex;
+      progressText.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
 
-  const question = deepQuestions[deepIndex];
-  const options = document.querySelectorAll('.quiz-option');
+      progressBar.style.width =
+        (currentQuestion / questions.length * 100) + "%";
 
-  options.forEach(function(button, index) {
-    button.disabled = true;
+      questionElement.textContent = item.question;
+      optionsElement.innerHTML = "";
+      feedbackElement.textContent = "";
 
-    if (index === optionIndex) {
-      button.classList.add('selected');
+      nextButton.disabled = true;
+
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "See Our Result ✨"
+          : "Next Question →";
+
+      item.options.forEach(function(optionText, index) {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "option";
+        button.textContent = optionText;
+
+        button.addEventListener("click", function() {
+          chooseAnswer(index);
+        });
+
+        optionsElement.appendChild(button);
+      });
     }
-  });
 
-  const feedback = document.getElementById('deepFeedback');
-  feedback.textContent = question.reflection;
-  feedback.classList.add('show');
+    function chooseAnswer(selectedIndex) {
+      if (answered) return;
 
-  document.getElementById('deepNext').disabled = false;
-}
+      answered = true;
 
-function nextDeepQuestion() {
-  if (deepAnswers[deepIndex] === null) {
-    return;
-  }
+      const item = questions[currentQuestion];
+      const optionButtons = optionsElement.querySelectorAll(".option");
 
-  if (deepIndex < deepQuestions.length - 1) {
-    deepIndex++;
-    renderDeepQuestion();
-  } else {
-    document.getElementById('quizContent').style.display = 'none';
-    document.getElementById('deepResult').classList.add('show');
-  }
-}
+      optionButtons.forEach(function(button) {
+        button.disabled = true;
+      });
 
-function previousDeepQuestion() {
-  if (deepIndex > 0) {
-    deepIndex--;
-    renderDeepQuestion();
-  }
-}
+      if (selectedIndex === item.correct) {
+        score++;
+        optionButtons[selectedIndex].classList.add("correct");
+        feedbackElement.textContent = "That's right! " + item.message;
+      } else {
+        optionButtons[selectedIndex].classList.add("incorrect");
+        optionButtons[item.correct].classList.add("correct");
 
-function restartDeepQuiz() {
-  deepIndex = 0;
-  deepAnswers = new Array(deepQuestions.length).fill(null);
+        feedbackElement.textContent =
+          "A little reminder: " + item.message;
+      }
 
-  document.getElementById('quizContent').style.display = 'block';
-  document.getElementById('deepResult').classList.remove('show');
+      progressBar.style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
 
-  renderDeepQuestion();
-}
+      nextButton.disabled = false;
+    }
 
-/* LOAD THE FIRST QUESTION */
+    function nextQuestion() {
+      if (!answered) return;
 
-renderDeepQuestion();
-</script>
+      currentQuestion++;
 
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        showQuizResult();
+      }
+    }
+
+    function showQuizResult() {
+      document.getElementById("quizGame").style.display = "none";
+      document.getElementById("quizResult").style.display = "block";
+
+      document.getElementById("resultScore").textContent =
+        "Your score: " + score + " out of " + questions.length;
+
+      let title;
+      let message;
+
+      if (score === 5) {
+        title = "A Perfect Little 5/5! 🌿";
+        message =
+          "You know our little world so well! Here's to all the memories " +
+          "we've made and all the beautiful ones still waiting for us.";
+      } else if (score >= 3) {
+        title = "A Lovely Little Result 💚";
+        message =
+          "Our story has so many little details. Let's keep making memories " +
+          "and collecting more reasons to smile together.";
+      } else {
+        title = "More Memories to Make ✨";
+        message =
+          "That's okay! The best part of our story is that we're still " +
+          "writing it together. Let's make even more memories.";
+      }
+
+      document.getElementById("resultTitle").textContent = title;
+      document.getElementById("resultMessage").textContent = message;
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+
+      document.getElementById("quizGame").style.display = "block";
+      document.getElementById("quizResult").style.display = "none";
+
+      loadQuestion();
+    }
+
+    // Start the quiz when the page loads.
+    loadQuestion();
+  </script>
 </body>
 </html>
+
