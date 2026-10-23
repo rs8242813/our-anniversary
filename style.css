@@ -1,396 +1,392 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+/* ========================================
+   OUR ANNIVERSARY — SAGE GARDEN THEME
+   Complete photo display fix
+======================================== */
 
 :root {
---sage: #DDE8D5;
---mint: #EEF4E8;
---forest: #294936;
---green: #78966B;
---ivory: #FFFDF5;
---yellow: #F2D98D;
+    --sage: #dce8d3;
+    --sage-light: #edf2e5;
+    --cream: #fffdf5;
+    --green: #294c3b;
+    --green-dark: #1e3c2e;
+    --text: #294c3b;
+    --shadow: 0 8px 24px rgba(41, 76, 59, 0.10);
 }
 
 * {
-  box-sizing: border-box;
-  }
+    box-sizing: border-box;
+}
 
 html,
 body {
-margin: 0;
-min-height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-background: var(--sage);
-color: var(--forest);
-font-family: 'DM Sans', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: linear-gradient(135deg, #f1f3e5, #cbdcc3);
 }
 
 button {
-font: inherit;
+    font: inherit;
+    cursor: pointer;
 }
 
-#app {
-min-height: 100vh;
-min-height: 100dvh;
-overflow: hidden;
-position: relative;
-}
+/* FULL-SCREEN CHAPTER PAGES */
 
 .page {
-display: none;
-position: relative;
-min-height: 100vh;
-min-height: 100dvh;
-width: 100%;
-padding: 64px 24px 40px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-overflow: hidden;
-isolation: isolate;
-background:
-radial-gradient(ellipse at 15% 15%, #F9F7E8 0%, transparent 40%),
-radial-gradient(ellipse at 90% 85%, #BFD4B6 0%, transparent 42%),
-var(--sage);
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 32px 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .page.active {
-display: flex;
-animation: pageReveal 700ms ease both;
+    display: flex;
+    animation: fadeIn 0.5s ease;
 }
 
-.page::before,
-.page::after {
-content: "❀";
-position: absolute;
-z-index: -1;
-color: var(--green);
-opacity: 0.23;
-font-size: clamp(100px, 19vw, 240px);
-pointer-events: none;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.page::before {
-top: -35px;
-left: -30px;
-transform: rotate(-20deg);
-}
-
-.page::after {
-bottom: -45px;
-right: -25px;
-transform: rotate(25deg);
-}
-
-@keyframes pageReveal {
-from {
-opacity: 0;
-transform: translateY(14px);
-}
-
-
-to {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-}
+/* HEADINGS AND TEXT */
 
 .eyebrow {
-margin: 0 0 18px;
-font-size: 11px;
-letter-spacing: 3px;
-font-weight: 700;
-line-height: 1.8;
+    margin: 0 0 16px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 h1,
 h2 {
-font-family: 'Playfair Display', Georgia, serif;
-font-weight: 500;
-line-height: 1.12;
-margin: 0;
+    color: var(--green);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
 }
 
 h1 {
-font-size: clamp(48px, 9vw, 100px);
+    margin: 0 0 20px;
+    font-size: clamp(38px, 7vw, 68px);
 }
 
 h2 {
-font-size: clamp(34px, 6vw, 62px);
+    margin: 0 0 20px;
+    font-size: clamp(30px, 5vw, 48px);
 }
 
 .subtitle {
-max-width: 520px;
-margin: 22px 0;
-line-height: 1.8;
-font-size: clamp(14px, 2vw, 17px);
+    max-width: 700px;
+    margin: 0 0 30px;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
-.flower-illustration {
-font-size: clamp(54px, 9vw, 85px);
-margin: 12px 0 24px;
-animation: flowerSway 3s ease-in-out infinite;
+/* BUTTONS */
+
+.next-button,
+button.next-button,
+#beginButton,
+#restartButton {
+    display: inline-block;
+    margin: 18px auto 0;
+    padding: 16px 28px;
+    border: none;
+    border-radius: 40px;
+    color: white;
+    background: var(--green);
+    font-weight: bold;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-@keyframes flowerSway {
-0%, 100% {
-transform: rotate(-7deg);
+.next-button:hover,
+#beginButton:hover,
+#restartButton:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
 }
 
+/* MEMORY PHOTO GRID */
 
-50% {
-    transform: rotate(7deg);
-}
-
-
-}
-
-.garden-decoration {
-position: absolute;
-color: var(--green);
-opacity: 0.65;
-pointer-events: none;
-animation: floatFlower 5s ease-in-out infinite;
-}
-
-.flower-one {
-top: 13%;
-left: 12%;
-font-size: clamp(40px, 7vw, 76px);
-}
-
-.flower-two {
-top: 24%;
-right: 13%;
-font-size: clamp(30px, 5vw, 60px);
-animation-delay: -2s;
-}
-
-.flower-three {
-bottom: 13%;
-left: 17%;
-font-size: clamp(35px, 6vw, 65px);
-animation-delay: -1s;
-}
-
-@keyframes floatFlower {
-0%, 100% {
-transform: translateY(0) rotate(0deg);
-}
-
-
-50% {
-    transform: translateY(-12px) rotate(8deg);
-}
-
-
-}
-
-.next-button {
-min-height: 52px;
-max-width: 100%;
-padding: 15px 26px;
-margin-top: 22px;
-border: 1px solid var(--forest);
-border-radius: 50px;
-background: var(--forest);
-color: var(--ivory);
-cursor: pointer;
-transition:
-background 200ms ease,
-color 200ms ease,
-transform 200ms ease;
-}
-
-.next-button:hover {
-background: var(--ivory);
-color: var(--forest);
-transform: translateY(-2px);
-}
-
-.next-button:focus-visible,
-.answer-button:focus-visible {
-outline: 3px solid var(--yellow);
-outline-offset: 4px;
-}
-
-.bottom-note {
-position: absolute;
-bottom: 15px;
-font-size: 12px;
-letter-spacing: 1px;
-}
-
-.memory-placeholder,
-.video-placeholder,
-.quiz-card {
-width: min(100%, 560px);
-padding: 28px;
-margin: 20px 0;
-border: 1px solid rgba(41, 73, 54, 0.14);
-border-radius: 24px;
-background: rgba(255, 253, 245, 0.72);
-box-shadow: 0 12px 35px rgba(41, 73, 54, 0.07);
-}
-
-.memory-placeholder > span,
-.video-placeholder > span {
-font-size: 48px;
-}
-
-.memory-placeholder small,
-.video-placeholder small {
-line-height: 1.7;
-}
-
-.quiz-card > p:first-child {
-font-family: 'Playfair Display', Georgia, serif;
-font-size: clamp(20px, 4vw, 29px);
-line-height: 1.5;
-}
-
-.answer-buttons {
-display: grid;
-gap: 12px;
-margin-top: 24px;
-}
-
-.answer-button {
-width: 100%;
-min-height: 48px;
-padding: 12px 18px;
-border: 1px solid #A9BCA0;
-border-radius: 14px;
-background: var(--ivory);
-color: var(--forest);
-cursor: pointer;
-}
-
-.answer-button:hover {
-background: var(--sage);
-}
-
-#quizFeedback {
-min-height: 24px;
-line-height: 1.6;
-}
-
-.final-flower {
-margin: 28px 0;
-font-size: 84px;
-color: var(--green);
-animation: flowerSway 4s ease-in-out infinite;
-}
-
-.final-message {
-font-family: 'Playfair Display', Georgia, serif;
-font-size: clamp(20px, 3.5vw, 30px);
-line-height: 1.8;
-}
-
-@media (max-width: 600px) {
-.page {
-padding: 56px 20px 32px;
-}
-
-
-.flower-one {
-    top: 7%;
-    left: 4%;
-}
-
-.flower-two {
-    top: 12%;
-    right: 4%;
-}
-
-.flower-three {
-    bottom: 8%;
-    left: 5%;
-}
-
-.memory-placeholder,
-.video-placeholder,
-.quiz-card {
-    padding: 22px 18px;
-}
-
-.next-button {
-    min-height: 50px;
-    padding: 14px 22px;
-}
-
-.bottom-note {
-    bottom: 8px;
-}
-
-
-}
-
-@media (max-height: 650px) {
-.page {
-padding-top: 28px;
-padding-bottom: 28px;
-}
-
-.eyebrow {
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    margin: 12px 0;
-}
-
-.flower-illustration {
-    margin: 4px 0 10px;
-    font-size: 48px;
-}
-
-.next-button {
-    margin-top: 12px;
-}
-
-.bottom-note {
-    display: none;
-}
-
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-*,
-*::before,
-*::after {
-animation-duration: 0.01ms !important;
-animation-iteration-count: 1 !important;
-transition-duration: 0.01ms !important;
-scroll-behavior: auto !important;
-}
-}
-
-css
-/* Anniversary photo display fix */
-.memory-card img,
-.memory-photo,
-.memory-card .photo {
+.memory-grid,
+.memories-grid,
+.photo-grid,
+.gallery,
+#memoryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
     width: 100%;
-    height: 180px;
-    object-fit: contain;
-    object-position: center;
-    background-color: #e2ead8;
+    max-width: 1050px;
+    margin: 10px auto 20px;
+    align-items: start;
+}
+
+/* INDIVIDUAL PHOTO CARDS */
+
+.memory-card,
+.memory-item,
+.photo-card,
+.gallery-item {
+    min-width: 0;
+    padding: 7px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--cream);
+    box-shadow: var(--shadow);
+}
+
+/*
+   IMPORTANT:
+   Show the ENTIRE image.
+   Do not crop faces, heads, or bodies.
+*/
+
+.memory-card img,
+.memory-item img,
+.photo-card img,
+.gallery-item img,
+.memory-grid img,
+.memories-grid img,
+.photo-grid img,
+.gallery img,
+#memoryGrid img,
+.memory-photo,
+.memory-placeholder img {
     display: block;
+    width: 100%;
+    height: 220px;
+    max-height: 32vh;
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: #e5ebdc;
     border-radius: 8px;
 }
 
-/* Keep photo cards neat on mobile */
-@media (max-width: 600px) {
+/* PHOTO CAPTIONS */
+
+.memory-card p,
+.memory-item p,
+.photo-card p,
+.gallery-item p,
+.memory-card h3,
+.memory-item h3,
+.photo-card h3,
+.gallery-item h3 {
+    margin: 9px 3px 5px;
+    color: var(--green);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.memory-card small,
+.memory-item small,
+.photo-card small,
+.gallery-item small {
+    display: block;
+    margin: 4px 3px 7px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* OLD EMPTY MEMORY PLACEHOLDER */
+
+.memory-placeholder {
+    width: 100%;
+    max-width: 750px;
+    padding: 35px 20px;
+    margin: 15px auto;
+    border-radius: 24px;
+    background: rgba(255, 253, 245, 0.8);
+    box-shadow: var(--shadow);
+}
+
+.memory-placeholder span {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 42px;
+}
+
+/* GAME CONTENT */
+
+.game-card,
+.quiz-card,
+.question-card {
+    width: 100%;
+    max-width: 650px;
+    padding: 28px;
+    margin: 12px auto;
+    border-radius: 20px;
+    background: var(--cream);
+    box-shadow: var(--shadow);
+}
+
+.game-card button,
+.quiz-card button,
+.question-card button {
+    margin: 8px;
+    padding: 12px 20px;
+    border: 1px solid #c4d5bd;
+    border-radius: 24px;
+    color: var(--green);
+    background: #f5f7ed;
+}
+
+.game-card button:hover,
+.quiz-card button:hover,
+.question-card button:hover {
+    background: var(--sage);
+}
+
+/* VIDEO */
+
+video,
+iframe {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    max-height: 65vh;
+    margin: 15px auto;
+    border: none;
+    border-radius: 16px;
+}
+
+/* FINAL MESSAGE */
+
+.final-message {
+    width: 100%;
+    max-width: 750px;
+    padding: 35px;
+    border-radius: 24px;
+    background: var(--cream);
+    box-shadow: var(--shadow);
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+/* TABLETS */
+
+@media (max-width: 800px) {
+    .memory-grid,
+    .memories-grid,
+    .photo-grid,
+    .gallery,
+    #memoryGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
     .memory-card img,
+    .memory-item img,
+    .photo-card img,
+    .gallery-item img,
+    .memory-grid img,
+    .memories-grid img,
+    .photo-grid img,
+    .gallery img,
+    #memoryGrid img,
     .memory-photo,
-    .memory-card .photo {
-        height: 160px;
+    .memory-placeholder img {
+        height: 200px;
+        max-height: 30vh;
+        object-fit: contain !important;
+    }
+}
+
+/* PHONES */
+
+@media (max-width: 480px) {
+    .page {
+        padding: 24px 12px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .memory-grid,
+    .memories-grid,
+    .photo-grid,
+    .gallery,
+    #memoryGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .memory-card,
+    .memory-item,
+    .photo-card,
+    .gallery-item {
+        padding: 5px;
+        border-radius: 9px;
+    }
+
+    .memory-card img,
+    .memory-item img,
+    .photo-card img,
+    .gallery-item img,
+    .memory-grid img,
+    .memories-grid img,
+    .photo-grid img,
+    .gallery img,
+    #memoryGrid img,
+    .memory-photo,
+    .memory-placeholder img {
+        height: 150px;
+        max-height: 25vh;
+        object-fit: contain !important;
+    }
+
+    .memory-card p,
+    .memory-item p,
+    .photo-card p,
+    .gallery-item p,
+    .memory-card h3,
+    .memory-item h3,
+    .photo-card h3,
+    .gallery-item h3 {
+        font-size: 12px;
+    }
+
+    .memory-card small,
+    .memory-item small,
+    .photo-card small,
+    .gallery-item small {
+        font-size: 10px;
+    }
+
+    .game-card,
+    .quiz-card,
+    .question-card,
+    .final-message {
+        padding: 20px 15px;
     }
 }
 
