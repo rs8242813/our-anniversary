@@ -89,12 +89,12 @@ opacity: 0;
 transform: translateY(14px);
 }
 
-```
+
 to {
     opacity: 1;
     transform: translateY(0);
 }
-```
+
 
 }
 
@@ -140,11 +140,11 @@ animation: flowerSway 3s ease-in-out infinite;
 transform: rotate(-7deg);
 }
 
-```
+
 50% {
     transform: rotate(7deg);
 }
-```
+
 
 }
 
@@ -181,11 +181,11 @@ animation-delay: -1s;
 transform: translateY(0) rotate(0deg);
 }
 
-```
+
 50% {
     transform: translateY(-12px) rotate(8deg);
 }
-```
+
 
 }
 
@@ -296,7 +296,7 @@ line-height: 1.8;
 padding: 56px 20px 32px;
 }
 
-```
+
 .flower-one {
     top: 7%;
     left: 4%;
@@ -326,7 +326,7 @@ padding: 56px 20px 32px;
 .bottom-note {
     bottom: 8px;
 }
-```
+
 
 }
 
@@ -336,7 +336,6 @@ padding-top: 28px;
 padding-bottom: 28px;
 }
 
-```
 .eyebrow {
     margin-bottom: 10px;
 }
@@ -357,7 +356,7 @@ padding-bottom: 28px;
 .bottom-note {
     display: none;
 }
-```
+
 
 }
 
@@ -371,3 +370,27 @@ transition-duration: 0.01ms !important;
 scroll-behavior: auto !important;
 }
 }
+
+css
+/* Anniversary photo display fix */
+.memory-card img,
+.memory-photo,
+.memory-card .photo {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    object-position: center;
+    background-color: #e2ead8;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Keep photo cards neat on mobile */
+@media (max-width: 600px) {
+    .memory-card img,
+    .memory-photo,
+    .memory-card .photo {
+        height: 160px;
+    }
+}
+
